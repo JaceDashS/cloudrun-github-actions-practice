@@ -1,0 +1,30 @@
+{
+  "name": "cloudrun-github-actions-practice",
+  "version": "1.0.1",
+  "description": "Google Cloud Run FastAPI Test with Docker and GitHub Actions",
+  "scripts": {
+    "docker:build": "docker build -t cloudrun-github-actions-practice .",
+    "docker:run": "docker run -p 8080:8080 --env PORT=8080 cloudrun-github-actions-practice",
+    "docker:run:detach": "docker run -d -p 8080:8080 --env PORT=8080 --name cloudrun-github-actions-practice cloudrun-github-actions-practice",
+    "docker:stop": "docker stop cloudrun-github-actions-practice || true",
+    "docker:rm": "docker rm cloudrun-github-actions-practice || true",
+    "docker:logs": "docker logs -f cloudrun-github-actions-practice",
+    "docker:shell": "docker exec -it cloudrun-github-actions-practice /bin/bash",
+    "docker:clean": "docker stop cloudrun-github-actions-practice 2>/dev/null || true && docker rm cloudrun-github-actions-practice 2>/dev/null || true && docker rmi cloudrun-github-actions-practice 2>/dev/null || true",
+    "docker:restart": "npm run docker:stop && npm run docker:rm && npm run docker:run:detach",
+    "docker:build:run": "npm run docker:build && npm run docker:run",
+    "docker:build:detach": "npm run docker:build && npm run docker:run:detach",
+    "dev": "uvicorn app.main:app --host 0.0.0.0 --port 8080 --reload",
+    "start": "uvicorn app.main:app --host 0.0.0.0 --port 8080",
+    "test:health": "curl http://localhost:8080/health"
+  },
+  "keywords": [
+    "fastapi",
+    "docker",
+    "cloud-run",
+    "github-actions"
+  ],
+  "author": "",
+  "license": "MIT"
+}
+

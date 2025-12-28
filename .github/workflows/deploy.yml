@@ -14,7 +14,7 @@ env:
   REGION: us-central1
 
   # Cloud Run service name
-  SERVICE: cloudrun-fastapi-test
+  SERVICE: cloudrun-github-actions-practice
 
   # Artifact Registry repo & image name
   ARTIFACT_REPO: cloudrun-github-actions-practice

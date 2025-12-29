@@ -47,5 +47,8 @@ Thumbs.db
 # Docker
 *.dockerignore
 
+# Models (too large for git)
+models/
+*.gguf
 
 cloudrun_fastapi_cloudrun_manual_deploy.md

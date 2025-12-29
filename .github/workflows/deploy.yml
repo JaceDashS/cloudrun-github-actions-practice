@@ -28,6 +28,20 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      # 모델 다운로드 (빌드 타임에 이미지에 포함시키기 위해)
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies for model download
+        run: |
+          pip install --no-cache-dir huggingface-hub
+
+      - name: Download model
+        run: |
+          python download_model.py
+
       # WIF (no JSON key). Secret: WIF_PROVIDER
       - name: Google Auth (WIF)
         uses: google-github-actions/auth@v2

@@ -4,6 +4,7 @@
   "description": "Google Cloud Run FastAPI Test with Docker and GitHub Actions",
   "scripts": {
     "docker:build": "docker build -t cloudrun-github-actions-practice .",
+    "docker:build:no-cache": "docker build --no-cache -t cloudrun-github-actions-practice .",
     "docker:run": "docker run -p 8080:8080 --env PORT=8080 cloudrun-github-actions-practice",
     "docker:run:detach": "docker run -d -p 8080:8080 --env PORT=8080 --name cloudrun-github-actions-practice cloudrun-github-actions-practice",
     "docker:stop": "docker stop cloudrun-github-actions-practice || true",
@@ -14,9 +15,17 @@
     "docker:restart": "npm run docker:stop && npm run docker:rm && npm run docker:run:detach",
     "docker:build:run": "npm run docker:build && npm run docker:run",
     "docker:build:detach": "npm run docker:build && npm run docker:run:detach",
+    "docker:build:no-cache:detach": "npm run docker:build:no-cache && npm run docker:run:detach",
     "dev": "uvicorn app.main:app --host 0.0.0.0 --port 8080 --reload",
     "start": "uvicorn app.main:app --host 0.0.0.0 --port 8080",
-    "test:health": "curl http://localhost:8080/health"
+    "test:health": "curl http://localhost:8080/health",
+    "download:model": "python download_model.py",
+    "benchmark": "python benchmark/benchmark_llama32b.py",
+    "benchmark:local": "python benchmark/local_benchmark.py",
+    "benchmark:docker": "python benchmark/test_docker.py",
+    "chat": "python benchmark/local_benchmark.py --mode chat",
+    "chat:llama": "python benchmark/local_benchmark.py --mode chat --model llama32b",
+    "chat:tiny": "python benchmark/local_benchmark.py --mode chat --model tinllama"
   },
   "keywords": [
     "fastapi",
